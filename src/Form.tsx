@@ -1,7 +1,7 @@
 import { type FormEvent, type ReactElement, type ReactNode, useCallback } from 'react';
 import { Text, TextProps } from './components/Text';
 import { Choice, ChoiceProps } from './components/Choice';
-
+import './form.css';
 
 type Errors<T extends object> = { [K in keyof T & string]?: string };
 

@@ -1,4 +1,5 @@
 import { Children, ReactElement, type ReactNode } from 'react';
+import { Label } from './Label';
 
 interface OptionProps {
     value: string;
@@ -36,14 +37,13 @@ export function Choice<Name extends string>({label, name, view, children}: Choic
     case 'select':
     case 'select-multiple': {
         return (
-            <label className="spk-form-component">
-                <span className="label-text">{label}</span>
+            <Label text={label}>
                 <select name={name} multiple={view === 'select-multiple'}>
                     {options.map((option) => (
                         <option key={option.value} value={option.value}>{option.children}</option>
                     ))}
                 </select>
-            </label>
+            </Label>
         );
     }
     }

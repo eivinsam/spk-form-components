@@ -1,3 +1,4 @@
+import { Label } from './Label';
 
 export interface TextProps<Name extends string> {
     label: string;
@@ -6,9 +7,8 @@ export interface TextProps<Name extends string> {
 
 export function Text<Name extends string>({ label, name }: TextProps<Name>) {
     return (
-        <label className="spk-form-component">
-            <span className="label-text">{label}</span>
-            <input type="text" name={name} />
-        </label>
+        <Label text={label}>
+            <input type="text" name={name}/>
+        </Label>
     );
 }
