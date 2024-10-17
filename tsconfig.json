@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+        "moduleResolution": "Bundler",
+        "esModuleInterop": true,
+        "target": "ES2022"
+    }
+}
