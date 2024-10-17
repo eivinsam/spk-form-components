@@ -50,9 +50,13 @@ export function Choice<T extends object>({label, name, view, children}: ChoicePr
     case 'select-multiple': {
         return (
             <Label text={label}>
-                <select name={name} multiple={view === 'select-multiple'}>
+                <select
+                    name={name}
+                    multiple={view === 'select-multiple'}
+                    defaultValue={view === 'select-multiple' ? undefined : options.find(it => it.selected)?.value}
+                >
                     {options.map((option) => (
-                        <option key={option.value} value={option.value} selected={option.selected}>
+                        <option key={option.value} value={option.value} selected={view === 'select-multiple' ? option.selected : undefined}>
                             {option.children}
                         </option>
                     ))}

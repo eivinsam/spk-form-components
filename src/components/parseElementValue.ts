@@ -20,7 +20,7 @@ PARSER_FOR.set(HTMLInputElement, (element: HTMLInputElement, raw) => {
     if (typeSpecificParser) {
         typeSpecificParser(element, raw);
     } else {
-        raw[element.type] = element.value;
+        raw[element.name] = element.value;
     }
 });
 PARSER_FOR_INPUT.set('checkbox', (element, raw) => {
@@ -35,6 +35,18 @@ PARSER_FOR_INPUT.set('checkbox', (element, raw) => {
         }
     } else {
         raw[element.value] = element.checked;
+    }
+});
+PARSER_FOR_INPUT.set('text', (element, raw) => {
+    switch (element.getAttribute('spkf-type')) {
+    case 'number': {
+        const value = Number(element.value.replace(',', '.').replace(/\s/g, ''));
+        raw[element.name] = Number.isNaN(value) ? undefined : value;
+        break;
+    }
+    default:
+        raw[element.name] = element.value;
+        break;
     }
 })
 

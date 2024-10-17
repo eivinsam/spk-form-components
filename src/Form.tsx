@@ -1,8 +1,9 @@
 import { type FormEvent, type ReactElement, type ReactNode, useCallback } from 'react';
 import { Text, TextProps } from './components/Text';
 import { Choice, ChoiceProps } from './components/Choice';
-import { parseElementValue } from './components/formValues';
+import { parseElementValue } from './components/parseElementValue';
 import './form.css';
+import { NumberProps, Number } from './components/Number';
 
 type Errors<T extends object> = { [K in keyof T & string]?: string };
 
@@ -15,6 +16,7 @@ type FormComponent<T extends object> = (props: FormProps<T>) => ReactElement;
 
 interface Form<T extends object> extends FormComponent<T> {
     Choice: (props: ChoiceProps<T>) => ReactElement;
+    Number: (props: NumberProps<T>) => ReactElement;
     Text: (props: TextProps<T>) => ReactElement;
 }
 
@@ -39,6 +41,7 @@ export function createForm<T extends object>(validate: Validator<T> = assumeVali
         return <form onSubmit={handleSubmit}>{children}</form>
     }
     Form.Choice = Choice;
+    Form.Number = Number;
     Form.Text = Text;
     return Form as Form<T>;
 }
