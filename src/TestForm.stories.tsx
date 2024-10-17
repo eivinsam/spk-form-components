@@ -15,9 +15,9 @@ const Form = createForm<Test>();
 function TestForm() {
     return (
         <Form onSubmit={console.log}>
-            <Form.Text label="Some text" name="text" />
+            <Form.Text label="Some text" name="text" value="initial" />
             <Form.Choice view="radio" label="Choose one!" name="radio">
-                <Option value="1">One</Option>
+                <Option value="1" selected>One</Option>
                 <Option value="10">Two</Option>
             </Form.Choice>
             <Form.Choice view="checkbox" label="Choose multiple!" name="check">
@@ -33,10 +33,10 @@ function TestForm() {
             <Form.Choice view="select-multiple" label="Multiselect!" name="multilist">
                 <Option value="from">From</Option>
                 <Option value="a">A</Option>
-                <Option value="list">List</Option>
+                <Option value="list" selected>List</Option>
                 <Option value="all">All</Option>
-                <Option value="at">At</Option>
-                <Option value="once">Once</Option>
+                <Option value="at" selected>At</Option>
+                <Option value="once" selected>Once</Option>
             </Form.Choice>
         </Form>
     );

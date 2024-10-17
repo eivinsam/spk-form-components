@@ -4,6 +4,7 @@ import { KeysOfType, SingleOrArray } from './typeutil';
 
 interface OptionProps {
     value: string;
+    selected?: boolean;
     children: ReactNode;
 }
 
@@ -38,7 +39,7 @@ export function Choice<T extends object>({label, name, view, children}: ChoicePr
                 <legend>{label}</legend>
                 {options.map((option) => (
                     <label key={option.value}>
-                        <input type={view} name={name} value={option.value}/>
+                        <input type={view} name={name} value={option.value} defaultChecked={option.selected}/>
                         <span className="label-text">{option.children}</span>
                     </label>
                 ))}
@@ -51,7 +52,9 @@ export function Choice<T extends object>({label, name, view, children}: ChoicePr
             <Label text={label}>
                 <select name={name} multiple={view === 'select-multiple'}>
                     {options.map((option) => (
-                        <option key={option.value} value={option.value}>{option.children}</option>
+                        <option key={option.value} value={option.value} selected={option.selected}>
+                            {option.children}
+                        </option>
                     ))}
                 </select>
             </Label>
