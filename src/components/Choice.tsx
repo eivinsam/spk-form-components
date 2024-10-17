@@ -1,5 +1,6 @@
 import { Children, ReactElement, type ReactNode } from 'react';
 import { Label } from './Label';
+import { KeysOfType, SingleOrArray } from './typeutil';
 
 interface OptionProps {
     value: string;
@@ -10,14 +11,24 @@ export function Option(props: OptionProps): ReactElement {
     throw Error('Option should never render!');
 }
 
-export interface ChoiceProps<Name extends string> {
+interface CommonChoiceProps {
     label: string;
-    name: Name;
-    view: 'radio' | 'checkbox' | 'select' | 'select-multiple';
-    children: ReactElement<OptionProps>[] | ReactElement<OptionProps>;
+    children: SingleOrArray<ReactElement<OptionProps>>;
 }
 
-export function Choice<Name extends string>({label, name, view, children}: ChoiceProps<Name>): ReactElement {
+interface SingleChoiceProps<T extends object> extends CommonChoiceProps {
+    name: KeysOfType<T, string>;
+    view: 'radio' | 'select';
+}
+
+interface MultiChoiceProps<T extends object> extends CommonChoiceProps {
+    name: KeysOfType<T, readonly string[]>;
+    view: 'checkbox' | 'select-multiple';
+}
+
+export type ChoiceProps<T extends object> = SingleChoiceProps<T> | MultiChoiceProps<T>;
+
+export function Choice<T extends object>({label, name, view, children}: ChoiceProps<T>): ReactElement {
     const options = Children.map(children, (child) => child.props)
     switch (view) {
     case 'radio':

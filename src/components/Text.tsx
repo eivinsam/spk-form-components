@@ -1,11 +1,12 @@
 import { Label } from './Label';
+import { KeysOfType } from './typeutil';
 
-export interface TextProps<Name extends string> {
+export interface TextProps<T extends object> {
     label: string;
-    name: Name;
+    name: KeysOfType<T, string>;
 }
 
-export function Text<Name extends string>({ label, name }: TextProps<Name>) {
+export function Text<T extends object>({ label, name }: TextProps<T>) {
     return (
         <Label text={label}>
             <input type="text" name={name}/>

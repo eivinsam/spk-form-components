@@ -13,8 +13,8 @@ interface FormProps<T extends object> {
 type FormComponent<T extends object> = (props: FormProps<T>) => ReactElement;
 
 interface Form<T extends object> extends FormComponent<T> {
-    Choice: (props: ChoiceProps<keyof T & string>) => ReactElement;
-    Text: (props: TextProps<keyof T & string>) => ReactElement;
+    Choice: (props: ChoiceProps<T>) => ReactElement;
+    Text: (props: TextProps<T>) => ReactElement;
 }
 
 type Validator<T extends object> = (raw: { [K in string]?: unknown }) => { data: T | null, errors: Errors<T> };

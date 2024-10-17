@@ -1,5 +1,5 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import { createForm } from './Form';
-import { Meta, StoryObj } from '@storybook/react';
 import { Option } from './components/Choice';
 
 interface Test {
